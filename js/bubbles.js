@@ -112,7 +112,7 @@ class BubbleAnimation {
     getPrizeMessage(type) {
         switch (type) {
             case 'special':
-                return 'lv的iphone15 pro （95新）';
+                return 'lv的iphone15 pro （75新）';
             case 'first':
                 return 'lv每日早安一周';
             case 'second':
@@ -300,3 +300,4 @@ class BubbleAnimation {
         return this.bubbleConfigs[type] || this.bubbleConfigs.special;
     }
 }
+
