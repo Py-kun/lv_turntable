@@ -1,0 +1,334 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+/* 标题区域 */
+.header {
+    margin-bottom: 2rem;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.gift-icon {
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+.main-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-top: 0.5rem;
+}
+
+/* 转盘区域 */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.wheel-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.wheel-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+#wheelCanvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pointer {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid #fff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    z-index: 10;
+}
+
+.center-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    background: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+/* 按钮样式 */
+.spin-button {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.spin-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4);
+}
+
+.spin-button:active {
+    transform: translateY(0);
+}
+
+.spin-button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* 结果展示区域 */
+.result-section {
+    margin-top: 1rem;
+    animation: fadeInUp 0.5s ease;
+}
+
+.result-banner {
+    background: linear-gradient(45deg, #f39c12, #e67e22);
+    color: white;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+}
+
+.celebration-icon {
+    font-size: 1.2rem;
+    animation: tada 1s infinite;
+}
+
+.result-text {
+    font-size: 1.1rem;
+}
+
+.claim-button {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(231, 76, 60, 0.3);
+    transition: all 0.3s ease;
+}
+
+.claim-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+}
+
+/* 气泡效果容器 */
+.bubbles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.1);
+}
+/* 显示时允许交互，确保关闭按钮可点击 */
+.bubbles-container.show { pointer-events: auto; }
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: bold;
+    animation: float-up 3s ease-out forwards;
+}
+ 
+ /* 长气泡特殊样式 */
+.bubble[style*="width: auto"] {
+    border-radius: 25px !important;
+    padding: 15px 25px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+    min-width: 200px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    z-index: 1001 !important;
+}
+ 
+ /* 固定气泡样式 */
+ .fixed-bubble {
+     position: fixed !important;
+     top: 50% !important;
+     left: 50% !important;
+     transform: translate(-50%, -50%) !important;
+     width: auto !important;
+     height: auto !important;
+     padding: 20px 30px !important;
+     border-radius: 30px !important;
+     font-size: 18px !important;
+     font-weight: bold !important;
+     color: white !important;
+     text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+     min-width: 250px !important;
+     text-align: center !important;
+     background: linear-gradient(135deg, #ff6b6b, #4ecdc4) !important;
+     box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+     backdrop-filter: blur(10px) !important;
+     z-index: 1001 !important;
+     animation: none !important;
+ }
+
+/* 动画效果 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes tada {
+    0% {
+        transform: scale(1);
+    }
+    10%, 20% {
+        transform: scale(0.9) rotate(-3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale(1.1) rotate(3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale(1.1) rotate(-3deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float-up {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) scale(0.5);
+    }
+}
+
+/* 工具类 */
+.hidden {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+.grid-container { display: flex; justify-content: center; align-items: center; margin: 20px 0; }
+.grid-lottery { display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 12px; padding: 16px; border: 8px solid #8e24aa; border-radius: 16px; background: #8e24aa; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.grid-cell { background: #fff; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-weight: bold; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.grid-center { background: #a1887f; color: #fff; }
+.grid-host { width: auto; }
+.grid-cell.active { outline: 4px solid #ffeb3b; box-shadow: 0 0 0 6px rgba(255,235,59,0.4); }
+.grid-cell { font-family: 'Segoe UI','Microsoft YaHei UI','PingFang SC','Helvetica Neue',Arial,sans-serif; }
+.grid-cell .icon { font-size: 28px; margin-bottom: 6px; }
+.grid-cell .label { font-size: 16px; }
+.grid-lottery.marquee { animation: borderPulse 0.6s infinite alternate; }
+@keyframes borderPulse { from { box-shadow: 0 0 0 8px #8e24aa, 0 0 12px 6px rgba(255,235,59,0.2); } to { box-shadow: 0 0 0 8px #8e24aa, 0 0 28px 12px rgba(255,235,59,0.7); } }
+.bubble-close { position: absolute; right: 8px; top: 8px; border: none; background: rgba(0,0,0,0.4); color: #fff; width: 28px; height: 28px; border-radius: 50%; font-size: 18px; line-height: 28px; cursor: pointer; }
+.bubble-close:hover { background: rgba(0,0,0,0.6); }

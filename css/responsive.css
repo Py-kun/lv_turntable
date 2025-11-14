@@ -1,0 +1,230 @@
+/* 移动端优先 - 默认样式已在style.css中定义 */
+
+/* 平板设备 (768px及以上) */
+@media screen and (min-width: 768px) {
+    .container {
+        padding: 3rem;
+        max-width: 600px;
+    }
+    
+    .main-title {
+        font-size: 2.2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .wheel-wrapper {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .spin-button {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.3rem;
+        min-width: 180px;
+    }
+    
+    .center-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2rem;
+    }
+    
+    .pointer {
+        top: -18px;
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+        border-top: 35px solid #fff;
+    }
+}
+
+/* 桌面设备 (1024px及以上) */
+@media screen and (min-width: 1024px) {
+    .container {
+        padding: 4rem;
+        max-width: 700px;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .wheel-wrapper {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .spin-button {
+        padding: 1.3rem 3rem;
+        font-size: 1.4rem;
+        min-width: 200px;
+    }
+    
+    .center-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+    }
+    
+    .pointer {
+        top: -20px;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 40px solid #fff;
+    }
+    
+    .result-banner {
+        padding: 1.2rem;
+        font-size: 1.2rem;
+    }
+    
+    .claim-button {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* 大屏桌面设备 (1440px及以上) */
+@media screen and (min-width: 1440px) {
+    .container {
+        padding: 5rem;
+        max-width: 800px;
+    }
+    
+    .main-title {
+        font-size: 3rem;
+    }
+    
+    .wheel-wrapper {
+        width: 450px;
+        height: 450px;
+    }
+    
+    .spin-button {
+        font-size: 1.5rem;
+        min-width: 220px;
+    }
+}
+
+/* 小屏手机优化 (375px及以下) */
+@media screen and (max-width: 375px) {
+    .container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .main-title {
+        font-size: 1.5rem;
+    }
+    
+    .wheel-wrapper {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .spin-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .center-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
+    }
+    
+    .pointer {
+        top: -12px;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 25px solid #fff;
+    }
+    
+    .result-banner {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .claim-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 横屏模式优化 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .container {
+        padding: 1rem;
+        max-height: 95vh;
+        overflow-y: auto;
+    }
+    
+    .wheel-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .main-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .spin-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .spin-button,
+    .claim-button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    .spin-button:active,
+    .claim-button:active {
+        transform: scale(0.95);
+    }
+}
+
+/* 高DPI屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .wheel-wrapper {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+    
+    .container {
+        background: rgba(44, 62, 80, 0.95);
+        color: #ecf0f1;
+    }
+    
+    .main-title {
+        color: #ecf0f1;
+    }
+    
+    .subtitle {
+        color: #bdc3c7;
+    }
+}
