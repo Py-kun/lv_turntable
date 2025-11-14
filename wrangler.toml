@@ -1,0 +1,5 @@
+name = "lv-turntable"
+compatibility_date = "2025-11-14"
+
+[pages]
+build_output_dir = "."
